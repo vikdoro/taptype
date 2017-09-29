@@ -1,0 +1,75 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="km-softkeys">
+
+    <template>
+
+        <style is="custom-style" include="iron-flex iron-flex-alignment">
+
+          :host {
+              display: block;
+              background-color: #33393d;
+              color: #fff;
+          }
+
+          .keypad {
+              height: 100%;
+          }
+
+          .key {
+              min-width: 32%;
+              background-color: #2b3035;
+              font-family: monospace;
+              font-size: 16px;
+              cursor: pointer;
+              margin: 2px;
+              flex: 1;
+          }
+
+        </style>
+
+        <div class="keypad flex layout horizontal wrap">
+            <template is="dom-repeat" items="{{keys}}">
+                <div class="key flex layout vertical center-center"
+                     on-tap="_keyTapped">[[item]]</div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+    class KmSoftkeys extends Polymer.GestureEventListeners(Polymer.Element) {
+        static get is() {
+            return 'km-softkeys';
+        }
+
+        static get properties() {
+            return {
+              keys: {
+                  type: Array,
+                  value: () => ['1','2','3','4','5','6','7','8','9', '.', '0', 'done']
+              }
+            }
+        }
+
+        constructor() {
+            super();
+        }
+
+        _keyTapped (e) {
+            this.dispatchEvent(
+                new CustomEvent('key-tapped', {
+                    bubbles: true,
+                    composed: true,
+                    detail: e.model.item
+                })
+            );
+        }
+      }
+
+      customElements.define(KmSoftkeys.is, KmSoftkeys);
+    </script>
+
+</dom-module>
+

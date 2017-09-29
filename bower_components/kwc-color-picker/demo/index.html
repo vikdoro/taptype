@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+        <title>kano-input-range demo</title>
+
+        <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+        <script>
+            window.Polymer = {
+                dom: 'shadow'
+            };
+        </script>
+
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../kwc-color-picker.html">
+        <link rel="import" href="../palettes/material.html">
+
+        <custom-style>
+            <style is="custom-style" include="demo-pages-shared-styles">
+                html, body {
+                    min-height: 100vh;
+                }
+                body {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                h1 {
+                    align-self: flex-start;
+                }
+                demo-snippet {
+                    --demo-snippet-demo: {
+                        background-color: #bbb;
+                    };
+                }
+                #material {
+                    --kwc-color-picker-size: 22px;
+                    --kwc-color-picker-margin: 0px;
+                }
+            </style>
+        </custom-style>
+    </head>
+    <body unresolved>
+        <div class="vertical-section-container">
+            <h3>kwc-color-picker</h3>
+            <demo-snippet>
+                <template>
+                    <kwc-color-picker id="input"></kwc-color-picker>
+                </template>
+            </demo-snippet>
+            <h3>kwc-color-picker with custom palette</h3>
+            <demo-snippet>
+                <template>
+                    <kwc-color-picker id="palette"></kwc-color-picker>
+                    <script>
+                        var input = document.getElementById('palette');
+                        input.colors = ['#ff0000', '#00ff00', '#0000ff'];
+                    </script>
+                </template>
+            </demo-snippet>
+            <h3>kwc-color-picker with material palette</h3>
+            <demo-snippet>
+                <template>
+                    <kwc-color-picker id="material"></kwc-color-picker>
+                    <script>
+                        var input = document.getElementById('material');
+                        input.colors = KwcColorPickerPalette.Material.colors;
+                        input.rowSize = KwcColorPickerPalette.Material.rowSize;
+                    </script>
+                </template>
+            </demo-snippet>
+            <h3>kwc-color-picker in idle mode</h3>
+            <demo-snippet>
+                <template>
+                    <kwc-color-picker id="idle" idle></kwc-color-picker>
+                </template>
+            </demo-snippet>
+        </div>
+    </body>
+</html>
